@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "editor.autoIndent": "full",
+    "[makefile]": {
+        "editor.insertSpaces": false,
+        "editor.formatOnSaveMode": "file",
+        "editor.tabSize": 4,
+        "editor.defaultFormatter": "ms-vscode.makefile-tools"
+    }
+}
