@@ -4,8 +4,8 @@
         "dockerfile": "Dockerfile",
         "context": ".",
         "args": {
-            "IMAGE": "mcr.microsoft.com/devcontainers/typescript-node",
-            "TAG": "dev-22",
+            "IMAGE": "ghcr.io/skymodulesbase",
+            "TAG": "release1",
             "VSCODE_USER" : "node"
         }
     },
