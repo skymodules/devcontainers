@@ -9,6 +9,13 @@ default:
 	@echo "DEVCONTAINER: $(DEVCONTAINER)"
 	@dotenvx run --quiet -f --$(ENV_FILES) -- doppler run -- echo "Ready"
 
+.PHONY: base/build
+# build base image
+base/build:
+	@docker build -t skymodules/base:latest -f ./base/Dockerfile .
+
+
+
 .PHONY:list 
 # list all sub-directories except .github, .vscode, and .git and remove trailing slash
 list:

@@ -6,16 +6,10 @@ HOSTNAME=$(hostname)
 KEY_COMMENT="${GITHUB_USER}@${HOSTNAME}"
 
 start_session() {
-    # determine if we are logged into github and if not log in via TOKEN
-    if [ -z "$GITHUB_USER" ]; then
-        echo "Logging into GitHub..."
-        gh auth login
-    fi
+
 }
 
 main() {
-    set -e # Exit immediately if any command fails
-    echo "Starting session..." && start_session || exit 1
 
 }
 
