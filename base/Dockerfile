@@ -1,6 +1,6 @@
 ARG VARIANT=dev-22
 ARG EXTRA_NODE_VERSION=22
-FROM mcr.microsoft.com/devcontainers/typescript-node:${VARIANT}
+FROM mcr.microsoft.com/devcontainers/typescript-node:dev-22
 
 # OS Packages
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

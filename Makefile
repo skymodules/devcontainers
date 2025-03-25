@@ -14,6 +14,11 @@ default:
 base/build:
 	@docker build -t skymodules/base:latest -f ./base/Dockerfile .
 
+.PHONY: base/publish
+# publish base image to github
+base/publish:
+	@doppler run -- echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
+
 
 
 .PHONY:list 
