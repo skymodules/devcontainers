@@ -6,5 +6,8 @@
         "editor.formatOnSaveMode": "file",
         "editor.tabSize": 4,
         "editor.defaultFormatter": "ms-vscode.makefile-tools"
+    },
+    "material-icon-theme.files.associations": {
+        "bats": "shell",
     }
 }

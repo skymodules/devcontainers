@@ -4,8 +4,8 @@
         "dockerfile": "Dockerfile",
         "context": ".",
         "args": {
-            "IMAGE": "ghcr.io/skymodulesbase",
-            "TAG": "release1",
+            "IMAGE": "ghcr.io/skymodules/devcontainers/base",
+            "TAG": "sha256-ada60bd9b9c8e2941af5fe07d609df6a0a0098c3f5be6307b6f8c263fdd12ae8",
             "VSCODE_USER" : "node"
         }
     },
