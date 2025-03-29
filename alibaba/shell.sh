@@ -10,7 +10,7 @@ start_session() {
 }
 
 main() {
-
+    start_session();
 }
 
 main "$@"

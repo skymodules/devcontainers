@@ -56,5 +56,5 @@ RUN vault --version
 RUN /home/${VSCODE_USER}/install-hashicorp.sh terraform
 RUN terraform --version
 
-RUN doppler --version 
+RUN doppler --version
 RUN dotenvx --version
