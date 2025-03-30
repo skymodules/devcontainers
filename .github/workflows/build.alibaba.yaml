@@ -5,28 +5,43 @@ on:
     branches:
       - release/alibaba/*
 
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: "skymodules/alibaba-devcontainer"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Pre-build dev container image
-        uses: devcontainers/ci@v0.3
+      - uses: actions/setup-node@v4
         with:
-          imageName: ghcr.io/skymodules/devcontainers/base
-          cacheFrom: ghcr.io/skymodules/devcontainers/base
-          push: always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          node-version: "18"
+          cache: "npm"
+          check-latest: false
 
-      - name: "Publish Templates"
+      - name: Install dependencies - devcontainer-cli
+        run: npm install -g @devcontainers/cli
+
+      - name: Install dependencies - dotenvx
+        run: curl -sfS https://dotenvx.sh/install.sh | sh
+
+      - name: Install dependencies - doppler
+        run: (curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh || wget -t 3 -qO- https://cli.doppler.com/install.sh) | sudo sh
+
+      - name: devcontainer build
+        run: make build DEVCONTAINER=alibaba
+
         uses: devcontainers/action@v1
         with:
           publish-templates: "true"
           base-path-to-templates: "./alibaba/"
-          generate-docs: "true"
+          generate-docs: "false"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

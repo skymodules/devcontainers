@@ -6,7 +6,7 @@ HOSTNAME=$(hostname)
 KEY_COMMENT="${GITHUB_USER}@${HOSTNAME}"
 
 start_session() {
-
+    echo "Starting SSH session..."
 }
 
 main() {
