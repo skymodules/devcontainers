@@ -16,8 +16,8 @@ jobs:
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/skymodules/devcontainers/base:latest
-          cacheFrom: ghcr.io/skymodules/devcontainers/base:latest
+          imageName: ghcr.io/skymodules/devcontainers/base
+          cacheFrom: ghcr.io/skymodules/devcontainers/base
           push: always
 
       - name: "Publish"
