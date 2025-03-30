@@ -3,6 +3,8 @@ IMAGE_NAME := "skymodules/$(DEVCONTAINER)"
 ID_LABEL="ci-container=$(DEVCONTAINER)"
 ENV_FILES := ./.env
 
+include ./base/Makefile
+
 include $(ENV_FILES)
 
 .PHONY:default
@@ -11,30 +13,20 @@ default:
 	@echo "DEVCONTAINER: $(DEVCONTAINER)"
 	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- echo "Ready"
 	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- gh auth status
-	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- echo "$$GH_TOKEN"
-	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- echo "$$GH_USERNAME"
-
-.PHONY: setup/gpg
-# setup gpg on the build machine
-setup/gpg:
-	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- echo "Setting up gpg"
-	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- ./.scripts/gpg.sh
+	@dotenvx run --quiet -f $(ENV_FILES) -- doppler secrets get GH_USERNAME GH_TOKEN --plain
 
 
-#
-# base image
-#
-
-.PHONY: base/build
-# build base image
-base/build:
-	@docker build -t skymodules/base:latest -f ./base/Dockerfile ./base
+.PHONY: doppler/setup
+# setup doppler auth
+doppler/setup:
+	@dotenvx run --quiet -f $(ENV_FILES) -- echo $$DOPPLER_TOKEN | doppler configure set token --scope /
+	@dotenvx run --quiet -f $(ENV_FILES) -- echo $$DOPPLER_TOKEN | doppler setup --no-interactive --no-save-token
 
 
-.PHONY: base/publish
-# publish base image to github
-base/publish:
-	@doppler run -- echo $GH_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
+# doppler/environments
+.PHONY: doppler/environments
+doppler/environments: doppler/setup
+	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- echo $$GH_USERNAME
 
 
 #
@@ -51,7 +43,7 @@ list:
 # @doppler run -- devcontainer build --workspace-folder "./$(DEVCONTAINER)" --config "./$(DEVCONTAINER)/devcontainer.json" --log-level info --image-name $(IMAGE_NAME)
 # @dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- devcontainer build --workspace-folder "./$(DEVCONTAINER)" --config "./$(DEVCONTAINER)/devcontainer.json" --log-level info --image-name "skymodules/$(DEVCONTAINER)"
 build:
-	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- echo $$GH_TOKEN | docker login ghcr.io -u rexwhitten --password-stdin
+	@dotenvx run --quiet -f $(ENV_FILES) -- doppler secrets get GH_TOKEN --plain | docker login ghcr.io -u rexwhitten --password-stdin
 	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- devcontainer build --workspace-folder "./$(DEVCONTAINER)" --config "./$(DEVCONTAINER)/devcontainer.json" --log-level info --image-name "skymodules/$(DEVCONTAINER)"
 
 .PHONY: up
@@ -64,9 +56,4 @@ up:
 .PHONY: publish
 # publish the devcontainer to github
 publish:
-	@doppler -- echo $$GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin`	
-
-
-#
-# all
-# 
+	@dotenvx run --quiet -f $(ENV_FILES) -- doppler run -- devcontainer templates publish -r ghcr.io -n skymodules/devcontainers ./alibaba

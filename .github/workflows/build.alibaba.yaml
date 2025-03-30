@@ -1,4 +1,4 @@
-name: "(Release) Release dev container templates"
+name: "🌩️ AliBaBa DevContainer, Features, and Templates"
 on:
   workflow_dispatch:
   push:
@@ -13,10 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/skymodules/devcontainers/base:latest
+          cacheFrom: ghcr.io/skymodules/devcontainers/base:latest
+          push: always
+
       - name: "Publish"
         uses: devcontainers/action@v1
         with:
           publish-templates: "true"
           base-path-to-templates: "./alibaba"
+          generate-docs: "true"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

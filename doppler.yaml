@@ -1,0 +1,3 @@
+setup:
+  - project: devcontainers
+    config: gh

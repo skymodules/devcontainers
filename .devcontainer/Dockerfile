@@ -3,7 +3,7 @@ ARG IMAGE="mcr.microsoft.com/devcontainers/python"
 ARG VSCODE_USER="vscode"
 
 
-FROM ${IMAGE}:${TAG}
+FROM ${IMAGE}:${VARIANT}
 
 USER root
 RUN mkdir -p /home/${VSCODE_USER}/tempx/
@@ -24,12 +24,17 @@ WORKDIR /workspace
 RUN mkdir -p /workspace/temp
 
 WORKDIR /workspace/temp
+
 RUN /home/${VSCODE_USER}/install.sh
 RUN trunk --version
 
 RUN /home/${VSCODE_USER}/install-hashicorp.sh vault
 RUN vault --version
+
 RUN /home/${VSCODE_USER}/install-hashicorp.sh terraform
 RUN terraform --version
+
+RUN /home/${VSCODE_USER}/install-hashicorp.sh packer
+RUN packer --version
 
 CMD ["dotenvx", "run", "--", "node", "index.js"]
