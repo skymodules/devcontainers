@@ -20,7 +20,7 @@ jobs:
           cacheFrom: ghcr.io/skymodules/devcontainers/base
           push: always
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: "Publish Templates"
         uses: devcontainers/action@v1
@@ -29,4 +29,4 @@ jobs:
           base-path-to-templates: "./alibaba/"
           generate-docs: "true"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
