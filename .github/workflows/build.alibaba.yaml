@@ -26,4 +26,3 @@ jobs:
           publish-templates: "true"
           base-path-to-templates: "./alibaba/"
           generate-docs: "true"
-          oc
