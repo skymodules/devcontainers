@@ -4,7 +4,7 @@
     "name": "AliBaBa Cloud DevContainer",
     "description": "A template for creating a DevContainer for AliBaBa Cloud.",
     "documentationURL": "https://skymodules.hashnode.space/default-guide/dev-containers",
-    "publisher": "SkyModules Team",
+    "publisher": "🌃 SkyModules Team",
     "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
     "options": {},
     "platforms": ["Any"],
