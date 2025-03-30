@@ -37,11 +37,3 @@ jobs:
 
       - name: devcontainer build
         run: make build DEVCONTAINER=alibaba
-
-        uses: devcontainers/action@v1
-        with:
-          publish-templates: "true"
-          base-path-to-templates: "./alibaba/"
-          generate-docs: "false"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
