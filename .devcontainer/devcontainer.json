@@ -1,48 +1,16 @@
+// More info: https://containers.dev/implementors/json_reference/
 {
-  "name": "@skymodules/dev-container-kit",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".",
-    "args": {
-      "IMAGE": "mcr.microsoft.com/devcontainers/typescript-node",
-      "TAG": "dev-22",
-      "VSCODE_USER" : "node"
-    }
-  },
-  "mounts": [
-    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=default",
-    "source=${localEnv:HOME}/.env,target=/home/vscode/.env,type=bind,consistency=default"
-  ],
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
-  "remoteUser": "vscode",
-  "customizations": {
-    "vscode": {
-      "settings": {},
-      "extensions": [
-        "GitHub.copilot",
-        "GitHub.github-vscode-theme",
-        "github.vscode-github-actions",
-        "GitHub.vscode-pull-request-github",
-        "ms-vscode.vscode-github-issue-notebooks",
-        "mads-hartmann.bash-ide-vscode",
-        "jetmartin.bats",
-        "AykutSarac.jsoncrack-vscode",
-        "ms-vscode.makefile-tools",
-        "foxundermoon.shell-format",
-        "redhat.vscode-yaml",
-        "Trunk.io",
-        "stateful.runme",
-        "bierner.markdown-mermaid",
-        "yzhang.markdown-all-in-one",
-        "eamodio.gitlens",
-        "ms-azuretools.vscode-docker",
-        "shd101wyy.markdown-preview-enhanced",
-        "hashicorp.terraform"
-      ]
-    }
-  },
-  "postCreateCommand": "dotenvx run --quiet -f ~/.env -- sh  ./.devcontainer/shell.sh"
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"mads-hartmann.bash-ide-vscode",
+				"dbaeumer.vscode-eslint"
+			]
+		}
+	},
+	"postCreateCommand": "npm install -g @devcontainers/cli"
 }
