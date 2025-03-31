@@ -1,10 +1,12 @@
-name: "Release Dev Container Templates & Generate Documentation"
+name: "🌩️ AliBaBa DevContainer, Features, and Templates"
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - release/alibaba/*
 
 jobs:
   deploy:
-    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
