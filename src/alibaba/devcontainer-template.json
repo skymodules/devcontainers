@@ -1,6 +1,6 @@
 {
     "id": "skymodules-alibaba",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "AliBaBa Cloud DevContainer",
     "description": "A template for creating a DevContainer for AliBaBa Cloud.",
     "documentationURL": "https://skymodules.hashnode.space/default-guide/dev-containers",
