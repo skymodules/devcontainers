@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: "Publish Templates"
+      - name: "AliBaBa : Publish Templates"
         uses: devcontainers/action@v1
         with:
           publish-templates: "true"
